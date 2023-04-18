@@ -52,11 +52,12 @@ reiniciar.push(objetos)
 Btreiniciar.addEventListener('click', function () {
 
   reiniciar.forEach((objeto) => { //pecorre todo o vetor "reiniciar" e atualiza ele 
-  
+    let campeao = document.getElementById('campeao')
     objeto.res1.innerHTML = '';
     objeto.res2.innerHTML = '';
     objeto.bt1.innerHTML = 'Jogar dado 1';
     objeto.bt2.innerHTML = 'Jogar dado 2';
+    campeao.innerHTML = '';
     objeto.jogador = 1 //jogador 1 vai jogar ao reiniciar
   });
   jogada = 0
