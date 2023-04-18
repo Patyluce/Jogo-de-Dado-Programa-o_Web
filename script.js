@@ -72,14 +72,29 @@ Btreiniciar.addEventListener('click', function () {
 //verificar o campeão da partida
   
  function campeao(){
+
+   if(jogada % 2 ===0){
+  if (jogada1 > jogada2) {
+    alert("Jogador 1 venceu a rodada!");
+  } else if (jogada1 < jogada2) {
+    alert("Jogador 2 venceu a rodada!");
+  } else if(jogada1 === jogada2) {
+    alert("Empate na rodada!");
+  }
+}
 if(jogada ===20){
+    
+  let campeao = document.getElementById('campeao')
   if(jogada1 > jogada2){
     alert('Jogador 1 ganhou o jogo!')
+    campeao.innerHTML = 'Você é muito sortudo jogador 1!'
   }else if(jogada2 > jogada1) {
     alert('Jogador 2 ganhou o jogo!')
+    campeao.innerHTML= 'Você é muito sortudo jogador 2!'
   }
   else if(jogada1 == jogada2){
     alert('Empate. Vamos de novo?')
+    campeao.innerHTML = 'Vocês não tem sorte?'
   }
   bt1.disabled = true
   bt2.disabled = true
