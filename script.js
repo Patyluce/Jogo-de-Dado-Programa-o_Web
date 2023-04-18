@@ -1,10 +1,8 @@
 let reiniciar= []
-let jogadas = []
-let jogada_Atual = 1
-let jogadas_Realizadas = 0
-let rodadas = 0
-let pontos_Jogador1 = 0
-let pontos_Jogador2 = 0
+let jogada = 0
+let jogada1 = 0
+let jogada2 = 0
+
 
 let Btreiniciar = document.getElementById('bt')
 let bt1 = document.getElementById('bt1')
@@ -12,38 +10,33 @@ let bt2 = document.getElementById('bt2')
 let resultado1 = document.getElementById('res1')
 let resultado2 = document.getElementById('res2')
 
+//atribui valores para bt1 e bt2
 bt1.addEventListener('click', function () {
-  if (jogada_Atual === 1) {
+
     let numAleatorio = Math.floor(Math.random() * 6) + 1
-    resultado1.innerHTML = `Número :  <strong> ${numAleatorio} <\strong> `;
-    jogadas_Realizadas++
-    pontos_Jogador1 += numAleatorio;
-    rodadas++
-    campeao()
-    if (jogadas_Realizadas % 2 === 0) {
-      jogada_Atual = 2
-    } else {
-      jogada_Atual = 1
-    }
-    jogada(jogada_Atual)
-  }
+    resultado1.innerHTML = `Pontos :  <strong> ${jogada1 +=numAleatorio} <\strong> `;
+    jogada++
+ 
+    document.getElementById("bt1").textContent = numAleatorio
+    bt1.disabled = true
+    bt2.disabled = false
+    campeao();
+  
+  
 });
 
 bt2.addEventListener('click', function () {
-  if (jogada_Atual === 2) {
+ 
     let numAleatorio = Math.floor(Math.random() * 6) + 1
-    resultado2.innerHTML = `Número :  <strong> ${numAleatorio} <\strong> `;
-    jogadas_Realizadas++
-     pontos_Jogador1 += numAleatorio
-    rodadas++
-    campeao()
-    if (jogadas_Realizadas % 2 === 0) {
-      jogada_Atual = 2
-    } else {
-      jogada_Atual = 1
-    }
-    jogada(jogada_Atual)
-  }
+    resultado2.innerHTML = `Pontos :  <strong> ${jogada2 +=numAleatorio} <\strong> `;
+    jogada++
+
+    document.getElementById("bt2").textContent = numAleatorio
+   bt1.disabled = false
+  bt2.disabled = true
+   campeao()
+   
+  
 });
 let objetos ={
    bt: Btreiniciar,
@@ -55,50 +48,42 @@ let objetos ={
 reiniciar.push(objetos)
 
 
-  // gerenciar a vez de cada jogador
-
+//limpar 
 Btreiniciar.addEventListener('click', function () {
-  
+
   reiniciar.forEach((objeto) => { //pecorre todo o vetor "reiniciar" e atualiza ele 
+  
     objeto.res1.innerHTML = '';
     objeto.res2.innerHTML = '';
+    objeto.bt1.innerHTML = 'Jogar dado 1';
+    objeto.bt2.innerHTML = 'Jogar dado 2';
+    objeto.jogador = 1 //jogador 1 vai jogar ao reiniciar
   });
-    jogada_Atual = 1
-    jogadas_Realizadas = 0
-    jogada(jogada_Atual)
-  });
+  jogada = 0
+  jogada1 = 0
+  jogada2 = 0
+  bt1.disabled = false
+  bt2.disabled = true
 
 
-function jogada(jogador) {
-  for (let i = 0; i < jogadas.length; i++) {
-    jogadas[i].disabled = true
-  }
-  jogadas[jogador - 1].disabled = false
-}
+})
+
+
+//verificar o campeão da partida
   
-  let Obj_Jogo = {
-    bt1: bt1,
-    bt2: bt2
+ function campeao(){
+if(jogada ===20){
+  if(jogada1 > jogada2){
+    alert('Jogador 1 ganhou o jogo!')
+  }else if(jogada2 > jogada1) {
+    alert('Jogador 2 ganhou o jogo!')
   }
-  jogadas.push(Obj_Jogo)
-
-  jogada(jogada_Atual);
-
-// calcular a quantidade de rodadas = 10
-
-function campeao(){
-  if(rodadas === 10){
-    if(pontos_Jogador1 > pontos_Jogador2){
-      alert("Jogador 1 ganhou!!")
-    }
-    else if(pontos_Jogador1 < pontos_Jogador2){
-      alert("Jogador 2 ganhou!!")
-    }
-    else{
-      alert("Empate! Que tal de novo?")
-    }
+  else if(jogada1 == jogada2){
+    alert('Empate. Vamos de novo?')
   }
+  bt1.disabled = true
+  bt2.disabled = true
 }
 
 
-  
+ }
